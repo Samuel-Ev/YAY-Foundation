@@ -1,0 +1,24 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../data/site";
+const { name, role, linkedin } = site.founder;
+---
+<div class="founder">
+  <div>
+    <b>{name}</b>
+    <span>{role}</span>
+  </div>
+  {linkedin && (
+    <a class="li" href={linkedin} rel="noopener" target="_blank" aria-label={`${name} on LinkedIn`}>
+      <Icon name="linkedin" size={18} /> LinkedIn
+    </a>
+  )}
+</div>
+
+<style>
+  .founder { margin-top: 28px; border-left: 4px solid var(--yellow); padding: 4px 0 4px 18px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+  b { font-family: var(--display); font-weight: 600; display: block; font-size: 19px; }
+  span { color: var(--ash); font-size: 15px; }
+  .li { display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-weight: 600; font-size: 14.5px; text-decoration: none; border: 1.5px solid var(--ink); border-radius: 999px; padding: 7px 14px; transition: background 0.2s ease; }
+  .li:hover { background: var(--yellow); }
+</style>

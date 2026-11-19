@@ -1,0 +1,19 @@
+---
+// The yellow opening band on inner pages (About, Our work, Outreach, Partner).
+import Label from "./Label.astro";
+interface Props { label: string; title: string }
+const { label, title } = Astro.props;
+---
+<div class="page-hero bg-yellow">
+  <div class="wrap">
+    <Label>{label}</Label>
+    <h1>{title}</h1>
+    <p><slot /></p>
+  </div>
+</div>
+
+<style>
+  .page-hero { padding: clamp(40px, 7vw, 88px) 0 clamp(36px, 6vw, 72px); }
+  h1 { font-size: clamp(38px, 6.2vw, 84px); font-weight: 800; letter-spacing: -0.035em; margin: 20px 0 18px; max-width: 13em; }
+  p { font-size: clamp(16.5px, 1.5vw, 20px); font-weight: 400; max-width: 36em; }
+</style>

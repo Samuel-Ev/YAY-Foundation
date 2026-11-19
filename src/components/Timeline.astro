@@ -1,0 +1,32 @@
+---
+import { events } from "../data/content";
+---
+<div class="timeline">
+  <div class="intro rv">
+    <h3>Where we have been</h3>
+    <p>Every date below is a day spent in a school hall or on a street, talking with young people and leaving something useful behind.</p>
+  </div>
+  <ol class="events">
+    {events.map((e) => (
+      <li class="rv">
+        <time datetime={e.date}>{e.label}</time>
+        <h4>{e.title}</h4>
+        <p>{e.text}</p>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .timeline { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(24px, 5vw, 70px); }
+  h3 { font-size: clamp(26px, 3vw, 38px); font-weight: 700; }
+  .intro p { color: var(--ash); margin-top: 14px; max-width: 26em; }
+  .events { margin: 0; padding: 0; list-style: none; border-left: 2px solid var(--ink); }
+  li { position: relative; padding: 0 0 30px 28px; }
+  li:last-child { padding-bottom: 0; }
+  li::before { content: ""; position: absolute; left: -9px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--yellow); border: 2px solid var(--ink); }
+  time { font-family: var(--display); font-weight: 500; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ash); }
+  h4 { font-size: 21px; font-weight: 600; margin: 4px 0 6px; letter-spacing: -0.01em; line-height: 1.2; }
+  p { font-size: 15.5px; max-width: 38em; }
+  @media (max-width: 800px) { .timeline { grid-template-columns: 1fr; } li { padding-left: 22px; } }
+</style>

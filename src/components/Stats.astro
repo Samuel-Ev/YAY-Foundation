@@ -1,0 +1,28 @@
+---
+import { stats } from "../data/content";
+const fmt = (n: number) => n.toLocaleString("en-GB");
+---
+<div class="stats bg-ink on-dark" aria-label="Our reach so far">
+  <div class="wrap row">
+    {stats.map((s) => (
+      <div class="stat">
+        <div class="n" data-count={s.value} data-suffix={s.suffix}>{fmt(s.value)}{s.suffix}</div>
+        <div class="t">{s.text}</div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat { padding: 30px 22px 28px; border-left: 1px solid #333; }
+  .stat:first-child { border-left: 0; padding-left: 0; }
+  .n { font-family: var(--display); font-weight: 700; font-size: clamp(34px, 4.4vw, 56px); color: var(--yellow); line-height: 1; font-variant-numeric: tabular-nums; letter-spacing: -0.03em; }
+  .t { font-size: 14.5px; margin-top: 8px; color: var(--on-dark-muted); max-width: 16em; line-height: 1.45; }
+  @media (max-width: 760px) {
+    .row { grid-template-columns: 1fr 1fr; column-gap: 18px; }
+    .stat { border-left: 0; border-top: 1px solid #333; padding: 20px 0; }
+    .stat:nth-child(-n + 2) { border-top: 0; }
+    .t { font-size: 13.5px; }
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+// SDG squares with a hand-drawn sketch for each goal.
+// The "pencil" look comes from an SVG filter that slightly wobbles each line,
+// so the drawings feel sketched rather than computer-perfect.
+import { goals } from "../data/content";
+
+// Line drawings on a 64 x 64 grid, keyed by SDG number.
+const sketches: Record<number, string> = {
+  // Zero Hunger: a bowl with steam and a spoon
+  2: `<path d="M10 32h44c-1 12-10 20-22 20S11 44 10 32z"/><path d="M8 32h48"/><path d="M24 24c-3-4 3-6 0-10M32 24c-3-4 3-6 0-10M40 24c-3-4 3-6 0-10"/><path d="M46 12l-6 16"/>`,
+  // Good Health: a heart with a pulse line
+  3: `<path d="M32 52S10 38 10 24c0-7 5-12 11-12 5 0 9 3 11 7 2-4 6-7 11-7 6 0 11 5 11 12 0 14-22 28-22 28z"/><path d="M14 32h10l4-8 5 14 4-9 3 3h10"/>`,
+  // Quality Education: an open book with a star above
+  4: `<path d="M32 22v30"/><path d="M32 22c-6-4-14-5-22-4v30c8-1 16 0 22 4"/><path d="M32 22c6-4 14-5 22-4v30c-8-1-16 0-22 4"/><path d="M16 28h10M16 34h10M38 28h10M38 34h10"/><path d="M32 4l2 5 5 .5-4 3 1 5-4-2.5-4 2.5 1-5-4-3 5-.5z"/>`,
+  // Gender Equality: two people with an equals sign
+  5: `<circle cx="18" cy="16" r="6"/><path d="M8 50c0-12 4-22 10-22s10 10 10 22z"/><circle cx="46" cy="16" r="6"/><path d="M38 50l2-22h12l2 22"/><path d="M28 36h8M28 42h8"/>`,
+  // Reduced Inequalities: arrows pointing in to a level line
+  10: `<path d="M8 40h48"/><path d="M32 8v20"/><path d="M26 22l6 6 6-6"/><path d="M32 56V48"/><path d="M14 30l-6 10 6 10"/><path d="M50 30l6 10-6 10"/>`,
+  // Sustainable Cities: houses with a tree
+  11: `<path d="M6 52h52"/><path d="M10 52V32l10-8 10 8v20"/><path d="M17 52v-9h6v9"/><path d="M30 52V20h14v32"/><path d="M34 26h6M34 33h6M34 40h6"/><circle cx="52" cy="34" r="6"/><path d="M52 40v12"/>`,
+  // Partnerships: two linked rings and a handshake line
+  17: `<circle cx="24" cy="26" r="13"/><circle cx="40" cy="26" r="13"/><path d="M10 50c6 0 8-4 14-4s8 6 14 6 8-4 16-4"/>`,
+};
+---
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="pencil" x="-10%" y="-10%" width="120%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="noise" />
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G" />
+  </filter>
+</svg>
+
+<div class="goals" aria-label="Sustainable Development Goals our work advances">
+  {goals.map((g) => (
+    <div class="goal rv">
+      <div class="top">
+        <b>{g.n}</b>
+        <svg class="sketch" viewBox="0 0 64 64" aria-hidden="true">
+          <circle class="blob" cx="34" cy="34" r="22" />
+          <g class="lines" set:html={sketches[g.n] ?? ""} />
+        </svg>
+      </div>
+      <span>{g.name}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .goals { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+  .goal { position: relative; border-radius: 14px; background: var(--cream); border: 1.5px solid transparent; padding: 14px 14px 16px; min-height: 184px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; transition: border-color 0.25s ease, transform 0.25s ease; }
+  .goal:hover { border-color: var(--ink); transform: translateY(-4px); }
+  :global(.bg-cream) .goal { background: var(--paper); }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+  b { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1; }
+  span { font-family: var(--display); font-weight: 500; font-size: 14px; line-height: 1.2; }
+
+  .sketch { width: 82px; height: 82px; flex: none; overflow: visible; }
+  .blob { fill: var(--yellow); opacity: 0.85; filter: url(#pencil); }
+  .lines { fill: none; stroke: var(--ink); stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; filter: url(#pencil); }
+  /* the line draws itself in when the card scrolls into view */
+  :global(.js) .rv .lines { stroke-dasharray: 260; stroke-dashoffset: 260; transition: stroke-dashoffset 1.6s var(--ease) 0.2s; }
+  :global(.js) .rv.in .lines { stroke-dashoffset: 0; }
+  .goal:hover .blob { opacity: 1; }
+
+  @media (max-width: 1100px) { .goals { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 700px) {
+    .goals { grid-template-columns: repeat(2, 1fr); }
+    .goal { min-height: 140px; }
+    .sketch { width: 56px; height: 56px; }
+  }
+  @media (prefers-reduced-motion: reduce) { :global(.js) .rv .lines { stroke-dashoffset: 0; } }
+</style>

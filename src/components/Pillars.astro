@@ -1,0 +1,30 @@
+---
+import { pillars } from "../data/content";
+---
+<div class="list">
+  {pillars.map((p, i) => (
+    <article class="pillar rv">
+      <div class="num">{String(i + 1).padStart(2, "0")}</div>
+      <h3>{p.title}</h3>
+      <p>{p.text}</p>
+      <div class="tags">{p.sdgs.map((n) => <span class="tag">SDG {n}</span>)}</div>
+    </article>
+  ))}
+</div>
+
+<style>
+  .list { border-top: 1px solid var(--line-dark); }
+  .pillar { display: grid; grid-template-columns: 90px 1fr 1.25fr auto; gap: clamp(16px, 3vw, 40px); align-items: start; padding: 30px 0; border-bottom: 1px solid var(--line-dark); transition: background 0.25s ease, padding 0.25s ease; }
+  .pillar:hover { background: #1e1e1e; padding-inline: 14px; }
+  .num { font-family: var(--display); font-weight: 300; font-size: 46px; line-height: 1; color: var(--yellow); font-variant-numeric: tabular-nums; }
+  h3 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 600; }
+  p { color: var(--on-dark-muted); font-size: 16px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: 170px; }
+  .tag { font-family: var(--display); font-weight: 500; font-size: 12.5px; letter-spacing: 0.06em; border: 1px solid var(--yellow); color: var(--yellow); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+  @media (max-width: 900px) {
+    .pillar { grid-template-columns: 48px 1fr; gap: 10px 14px; padding: 24px 0; }
+    .pillar:hover { padding-inline: 0; background: none; }
+    .num { font-size: 32px; }
+    p, .tags { grid-column: 2; justify-content: flex-start; max-width: none; }
+  }
+</style>

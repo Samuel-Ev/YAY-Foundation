@@ -1,0 +1,123 @@
+---
+// Privacy policy and website terms. Plain-language template: have it reviewed before launch.
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+
+// Update this date whenever the text below changes.
+const updated = "19 November 2026";
+---
+<Layout title="Privacy and website terms" description="How YAY Foundation handles personal data on this website, your rights under the Nigeria Data Protection Act 2023, our use of photographs, and the terms for using this site.">
+  <PageHero label="Legal" title="Privacy and website terms.">
+    How we handle the information you share with us, and the terms for using this website. Last updated {updated}.
+  </PageHero>
+
+  <section class="section tight">
+    <div class="wrap doc">
+      <nav class="toc" aria-label="On this page">
+        <b>On this page</b>
+        <ol>
+          <li><a href="#who">Who we are</a></li>
+          <li><a href="#collect">What we collect</a></li>
+          <li><a href="#use">How we use it</a></li>
+          <li><a href="#share">Who we share it with</a></li>
+          <li><a href="#keep">How long we keep it</a></li>
+          <li><a href="#rights">Your rights</a></li>
+          <li><a href="#children">Children and photographs</a></li>
+          <li><a href="#cookies">Cookies</a></li>
+          <li><a href="#terms">Website terms</a></li>
+          <li><a href="#changes">Changes and contact</a></li>
+        </ol>
+      </nav>
+
+      <article class="body">
+        <h2 id="who">1. Who we are</h2>
+        <p>This website is run by {site.fullName} ("YAY Foundation", "we", "us"), a youth-led foundation working in Nigeria. For the purposes of the Nigeria Data Protection Act 2023 (NDPA), we are the data controller for personal data collected through this website.</p>
+        <p>Contact for privacy questions: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+        <h2 id="collect">2. What we collect</h2>
+        <p>We only collect what you choose to give us, and a small amount of technical data needed to run the site.</p>
+        <ul>
+          <li><strong>When you send a message:</strong> your name, email address, organisation (if you give one), the topic and your message.</li>
+          <li><strong>When you email us directly:</strong> whatever you include in your email.</li>
+          <li><strong>Technical data:</strong> our hosting provider automatically records basic request data, such as IP address, browser type and the pages requested, to deliver the site and keep it secure.</li>
+        </ul>
+        <p>We do not ask for payment details, identity documents or sensitive personal data on this website. Please do not send us sensitive information about yourself or anyone else through the contact form.</p>
+
+        <h2 id="use">3. How we use it</h2>
+        <ul>
+          <li>To reply to your enquiry, and to discuss partnerships, school visits, volunteering or support you have asked about. Our lawful basis is your consent and our legitimate interest in responding to people who contact us.</li>
+          <li>To keep the website running and secure. Our lawful basis is our legitimate interest in operating a safe website.</li>
+        </ul>
+        <p>We do not sell your personal data, and we do not use it for advertising.</p>
+
+        <h2 id="share">4. Who we share it with</h2>
+        <p>We share personal data only with service providers that help us run this website, and only as far as they need it:</p>
+        <ul>
+          <li><strong>Vercel</strong>, which hosts the website.</li>
+          <li><strong>Web3Forms</strong>, which delivers contact form messages to our email inbox (when the form sends directly).</li>
+          <li><strong>Google</strong>, which provides our email service and serves the fonts used on this site.</li>
+        </ul>
+        <p>Some of these providers process data outside Nigeria. Where that happens, we rely on the safeguards these providers offer, as permitted under the NDPA. We may also disclose information where the law requires it.</p>
+
+        <h2 id="keep">5. How long we keep it</h2>
+        <p>We keep enquiry messages for as long as we need them to deal with your enquiry and any partnership that follows, and then delete them, normally within two years of our last contact with you.</p>
+
+        <h2 id="rights">6. Your rights</h2>
+        <p>Under the Nigeria Data Protection Act 2023 you have the right to:</p>
+        <ul>
+          <li>be told how your personal data is used, and get a copy of it;</li>
+          <li>ask us to correct data that is wrong or incomplete;</li>
+          <li>ask us to delete your data, or to stop or limit how we use it;</li>
+          <li>withdraw your consent at any time;</li>
+          <li>object to how we use your data; and</li>
+          <li>complain to the Nigeria Data Protection Commission (NDPC).</li>
+        </ul>
+        <p>To use any of these rights, email <a href={`mailto:${site.email}`}>{site.email}</a>. We will reply as soon as we can and within the time the law allows.</p>
+
+        <h2 id="children">7. Children and photographs</h2>
+        <p>Our work is with children and young people, and we take their privacy and dignity seriously.</p>
+        <ul>
+          <li>This website is not designed to collect personal data from children. If you are under 18, please ask a parent, guardian or teacher to contact us for you.</li>
+          <li>Photographs and videos from our outreaches are taken and published with the permission of the schools involved and, where required, parents or guardians. We do not publish children's names with their photographs.</li>
+          <li>If you, or a child in your care, appear in an image on this site and would like it removed, email us and we will take it down promptly.</li>
+        </ul>
+
+        <h2 id="cookies">8. Cookies</h2>
+        <p>This website does not use advertising or tracking cookies. If we add website analytics in future, we will update this page first.</p>
+
+        <h2 id="terms">9. Website terms</h2>
+        <p>By using this website you agree to these terms.</p>
+        <ul>
+          <li><strong>Our content:</strong> the YAY Foundation name, logo, photographs, video and text on this site belong to YAY Foundation or are used with permission. You may share links to our pages. Please do not copy, alter or reuse our logo, photographs or video without our written permission, and never use images of the children in our programmes for any other purpose.</li>
+          <li><strong>Accuracy:</strong> we work to keep the information here accurate. Figures such as people reached and items distributed reflect our records at the time of writing and may be updated. The website is provided for general information, and we cannot guarantee it is always complete, current or free of errors.</li>
+          <li><strong>Other websites:</strong> links to other sites, such as Instagram or LinkedIn, are for convenience. We are not responsible for their content or their privacy practices.</li>
+          <li><strong>Partnerships and gifts:</strong> nothing on this website is a binding offer or agreement. Any partnership, sponsorship or donation is agreed with us directly, in writing.</li>
+          <li><strong>Fair use:</strong> please do not misuse the site, for example by sending spam through the contact form or trying to disrupt or gain unauthorised access to it.</li>
+          <li><strong>Law:</strong> these terms are governed by the laws of the Federal Republic of Nigeria.</li>
+        </ul>
+
+        <h2 id="changes">10. Changes and contact</h2>
+        <p>We may update this page from time to time. The date at the top shows when it last changed.</p>
+        <p>Questions about this page, or about how we handle personal data: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .doc { display: grid; grid-template-columns: 240px 1fr; gap: clamp(28px, 5vw, 70px); align-items: start; }
+  .toc { position: sticky; top: calc(var(--header-h) + 24px); background: var(--cream); border-radius: var(--radius); padding: 20px 22px; }
+  .toc b { font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .toc ol { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 6px; font-size: 15px; }
+  .toc a { text-decoration: none; }
+  .toc a:hover { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; }
+  .body { max-width: 44em; }
+  .body h2 { font-size: clamp(22px, 2.4vw, 28px); font-weight: 700; margin: 44px 0 12px; scroll-margin-top: calc(var(--header-h) + 20px); }
+  .body h2:first-child { margin-top: 0; }
+  .body p { margin: 0 0 12px; }
+  .body ul { margin: 0 0 12px; padding-left: 22px; display: grid; gap: 8px; }
+  .body strong { font-weight: 500; }
+  .body a { text-decoration-color: var(--yellow); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  @media (max-width: 860px) { .doc { grid-template-columns: 1fr; } .toc { position: static; } }
+</style>

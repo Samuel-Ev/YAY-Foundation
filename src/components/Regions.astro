@@ -1,0 +1,37 @@
+---
+// Four region cards. On phones they become a sideways swipe row.
+import { regions } from "../data/content";
+---
+<div class="regions" role="list">
+  {regions.map((r) => (
+    <article class="region rv" role="listitem">
+      <span class="zone">{r.zone}</span>
+      <h3>{r.state}</h3>
+      <ul>{r.points.map((p) => <li>{p}</li>)}</ul>
+    </article>
+  ))}
+</div>
+<p class="hint" aria-hidden="true">Swipe to see all four regions →</p>
+
+<style>
+  .regions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .region { border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 22px 20px 20px; display: flex; flex-direction: column; gap: 12px; background: var(--paper); transition: transform 0.25s ease, background 0.25s ease; }
+  .region:hover { transform: translateY(-5px); background: var(--yellow); }
+  .zone { font-family: var(--display); font-weight: 500; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ash); }
+  .region:hover .zone { color: var(--ink); }
+  h3 { font-size: 25px; font-weight: 700; }
+  ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; font-size: 15px; line-height: 1.4; }
+  li { padding-left: 18px; position: relative; }
+  li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); }
+  .hint { display: none; }
+  @media (max-width: 980px) {
+    .regions {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px;
+      margin-inline: calc(var(--gut) * -1); padding: 4px var(--gut) 10px; scrollbar-width: none;
+    }
+    .regions::-webkit-scrollbar { display: none; }
+    .region { flex: 0 0 78%; max-width: 320px; scroll-snap-align: start; }
+    .region:hover { transform: none; }
+    .hint { display: block; font-size: 13.5px; color: var(--ash); margin-top: 6px; }
+  }
+</style>

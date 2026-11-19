@@ -1,0 +1,31 @@
+---
+// The yellow "Partner with us" band that closes the home page:
+// who we partner with, plus routes to email or the contact page.
+import Label from "./Label.astro";
+import Button from "./Button.astro";
+import PartnerWays from "./PartnerWays.astro";
+import { site } from "../data/site";
+---
+<section class="cta bg-yellow" id="partner-cta">
+  <div class="wrap">
+    <Label class="rv">Partner with us</Label>
+    <h2 class="rv">Help us reach 10,000 lives by 2030.</h2>
+    <p class="lede rv">We welcome funding, materials, expertise and official support. Tell us what you have in mind and our team will reply by email.</p>
+    <div class="ways"><PartnerWays /></div>
+    <div class="acts rv">
+      <Button href={`mailto:${site.email}?subject=Partnership%20with%20YAY%20Foundation`} arrow>Email our partnerships team</Button>
+      <Button href="/partner" variant="ghost">Send us a message</Button>
+    </div>
+    <p class="addr rv">{site.email}</p>
+  </div>
+</section>
+
+<style>
+  .cta { padding: clamp(56px, 8vw, 112px) 0; }
+  h2 { font-size: clamp(38px, 6.4vw, 88px); font-weight: 800; letter-spacing: -0.035em; margin: 20px 0; max-width: 12em; }
+  .lede { max-width: 36em; font-weight: 400; font-size: clamp(16.5px, 1.5vw, 19px); }
+  .ways { margin: 36px 0 30px; }
+  .acts { display: flex; flex-wrap: wrap; gap: 12px; }
+  .addr { margin-top: 14px; font-family: var(--display); font-weight: 500; word-break: break-word; }
+  @media (max-width: 560px) { .acts :global(.btn) { width: 100%; justify-content: center; } }
+</style>

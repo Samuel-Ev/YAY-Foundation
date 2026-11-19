@@ -1,0 +1,22 @@
+---
+// Label + heading on the left, intro text on the right. Used at the top of most sections.
+import Label from "./Label.astro";
+interface Props { label: string; title: string; dark?: boolean; level?: "h1" | "h2" }
+const { label, title, dark = false, level = "h2" } = Astro.props;
+const H = level;
+---
+<div class:list={["head rv", dark && "dark"]}>
+  <div>
+    <Label tone={dark ? "yellow" : "dark"}>{label}</Label>
+    <H>{title}</H>
+  </div>
+  <p><slot /></p>
+</div>
+
+<style>
+  .head { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 4vw, 60px); align-items: end; margin-bottom: clamp(28px, 4vw, 54px); }
+  h1, h2 { font-size: clamp(32px, 4.8vw, 62px); font-weight: 700; margin-top: 18px; }
+  p { color: var(--ash); max-width: 34em; }
+  .dark p { color: #c9c6bc; }
+  @media (max-width: 800px) { .head { grid-template-columns: 1fr; } }
+</style>

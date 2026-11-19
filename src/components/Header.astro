@@ -1,0 +1,39 @@
+---
+// Desktop: full nav across the top. Phones: logo + quick contact icons only (BottomNav handles navigation).
+import Brand from "./Brand.astro";
+import Icon from "./Icon.astro";
+import { nav, site } from "../data/site";
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const sections = nav.filter((n) => n.href.startsWith("/#"));
+---
+<header class="site-head">
+  <div class="wrap row">
+    <Brand />
+    <nav class="desk-nav" aria-label="Main">
+      {sections.map((n) => <a href={n.href} data-spy={n.href.slice(2)}>{n.label}</a>)}
+      <a href="/partner#contact">Contact</a>
+      <a class="btn small" href="/partner" aria-current={path === "/partner" ? "page" : undefined}>Partner with us</a>
+    </nav>
+    <div class="quick">
+      <a href={`mailto:${site.email}`} aria-label={`Email ${site.email}`}><Icon name="mail" size={20} /></a>
+      <a href={site.instagram.url} rel="noopener" target="_blank" aria-label={`Instagram ${site.instagram.handle}`}><Icon name="instagram" size={20} /></a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-head { position: sticky; top: 0; z-index: 60; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--ash-soft); }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: var(--header-h); }
+  .desk-nav { display: flex; align-items: center; gap: 26px; }
+  .desk-nav a:not(.btn) { font-family: var(--display); font-weight: 500; font-size: 15.5px; text-decoration: none; position: relative; padding: 6px 0; }
+  .desk-nav a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--yellow); transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
+  .desk-nav a:not(.btn):hover::after, .desk-nav a.on::after { transform: scaleX(1); }
+  .desk-nav .btn[aria-current="page"] { background: var(--yellow); color: var(--ink); }
+  .quick { display: none; gap: 8px; }
+  .quick a { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--ink); color: var(--ink); }
+  .quick a:active { background: var(--yellow); }
+  @media (max-width: 860px) {
+    .desk-nav { display: none; }
+    .quick { display: flex; }
+  }
+</style>

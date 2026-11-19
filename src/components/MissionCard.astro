@@ -1,0 +1,29 @@
+---
+import Label from "./Label.astro";
+import { site } from "../data/site";
+import { logoMeaning } from "../data/content";
+const icons: Record<string, string> = {
+  hands: '<circle cx="17" cy="17" r="16" fill="#141414"/><path d="M11 8c9 5 9 9 0 18M23 8c-9 5-9 9 0 18" fill="none" stroke="#FFD801" stroke-width="3" stroke-linecap="round"/>',
+  diamond: '<circle cx="17" cy="17" r="16" fill="#FFD801" stroke="#141414" stroke-width="1.5"/><path d="M17 8l7 9-7 9-7-9z" fill="#141414"/>',
+  globe: '<circle cx="17" cy="17" r="15" fill="none" stroke="#141414" stroke-width="2.5"/><path d="M2 17h30M17 2c6 5 6 25 0 30M17 2c-6 5-6 25 0 30" fill="none" stroke="#141414" stroke-width="1.5"/>',
+  star: '<path d="M17 3l4.2 8.7 9.5 1.3-6.9 6.7 1.7 9.5L17 24.7l-8.5 4.5 1.7-9.5-6.9-6.7 9.5-1.3z" fill="#FFD801" stroke="#141414" stroke-width="2" stroke-linejoin="round"/>',
+};
+---
+<aside class="card rv">
+  <Label>Our mission</Label>
+  <q>{site.motto}</q>
+  <ul>
+    {logoMeaning.map((m) => (
+      <li><svg viewBox="0 0 34 34" aria-hidden="true" set:html={icons[m.icon]} /><div><b>{m.title}</b>{m.text}</div></li>
+    ))}
+  </ul>
+</aside>
+
+<style>
+  .card { background: var(--cream); border-radius: 22px; padding: clamp(22px, 3vw, 38px); }
+  q { font-family: var(--display); font-weight: 600; font-size: clamp(28px, 3.6vw, 46px); line-height: 1.05; letter-spacing: -0.025em; display: block; margin: 16px 0 26px; quotes: "\201C" "\201D"; }
+  ul { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
+  li { display: grid; grid-template-columns: 34px 1fr; gap: 14px; font-size: 15.5px; line-height: 1.5; }
+  svg { width: 34px; height: 34px; }
+  b { font-family: var(--display); font-weight: 600; display: block; }
+</style>

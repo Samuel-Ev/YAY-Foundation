@@ -1,0 +1,80 @@
+---
+// Page 1 of 2: the landing page. The whole story, from who we are to how to partner.
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Stats from "../components/Stats.astro";
+import WordBand from "../components/WordBand.astro";
+import AboutIntro from "../components/AboutIntro.astro";
+import SectionHead from "../components/SectionHead.astro";
+import Pillars from "../components/Pillars.astro";
+import Goals from "../components/Goals.astro";
+import Regions from "../components/Regions.astro";
+import Timeline from "../components/Timeline.astro";
+import Gallery from "../components/Gallery.astro";
+import VideoFeature from "../components/VideoFeature.astro";
+import TargetsTable from "../components/TargetsTable.astro";
+import CtaBand from "../components/CtaBand.astro";
+---
+<Layout>
+  <div id="top"></div>
+  <Hero />
+  <Stats />
+  <WordBand />
+
+  <section class="section" id="about">
+    <div class="wrap"><AboutIntro /></div>
+  </section>
+
+  <section class="section bg-ink on-dark" id="work">
+    <div class="wrap">
+      <SectionHead label="Our work" title="Four pillars carry everything we do." dark>
+        Each pillar answers a problem we meet in schools and on the street, and each one maps to specific Sustainable Development Goals.
+      </SectionHead>
+      <Pillars />
+    </div>
+  </section>
+
+  <section class="section bg-cream" id="goals">
+    <div class="wrap">
+      <SectionHead label="The global goals" title="Seven SDGs our work moves forward.">
+        The UN's 2030 Agenda has 17 goals. Our outreaches contribute most directly to these seven.
+      </SectionHead>
+      <Goals />
+    </div>
+  </section>
+
+  <section class="section" id="outreach">
+    <div class="wrap">
+      <SectionHead label="Outreach footprint" title="West, North, East and South.">
+        Leaving no one behind means going beyond one city or one region. We adapt each outreach to local custom and keep the same message of equity everywhere.
+      </SectionHead>
+      <Regions />
+      <div class="gap"><Timeline /></div>
+    </div>
+  </section>
+
+  <section class="section bg-cream" id="gallery">
+    <div class="wrap">
+      <SectionHead label="In the field" title="What an outreach day looks like.">
+        Full halls, open notebooks and a lot of questions. These photographs come from our school visits.
+      </SectionHead>
+      <Gallery />
+      <VideoFeature />
+    </div>
+  </section>
+
+  <section class="section" id="targets">
+    <div class="wrap">
+      <SectionHead label="2025 to 2030" title="Targets we can be held to.">
+        Each target names the goals it serves and how we intend to deliver it. This is the plan we share with ministries, funders and partner organisations.
+      </SectionHead>
+      <TargetsTable />
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>
+
+<style>
+  .gap { margin-top: clamp(44px, 6vw, 80px); }
+</style>

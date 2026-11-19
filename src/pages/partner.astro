@@ -1,0 +1,31 @@
+---
+// Page 2 of 2: the contact page. A quick summary of what a partnership helps deliver,
+// then the message form. The full story lives on the home page.
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHead from "../components/SectionHead.astro";
+import TargetTiles from "../components/TargetTiles.astro";
+import ContactBlock from "../components/ContactBlock.astro";
+import Button from "../components/Button.astro";
+---
+<Layout title="Partner with us" description="Get in touch with YAY Foundation about partnerships, funding, school visits or volunteering, and see the 2030 targets your support helps deliver.">
+  <PageHero label="Partner with us" title="Let's work together.">
+    Whether you represent a ministry, an international body, a foundation or a school, or you simply want to help, send us a message and our team will reply by email.
+  </PageHero>
+
+  <ContactBlock />
+
+  <section class="section bg-cream">
+    <div class="wrap">
+      <SectionHead label="What your support delivers" title="Our targets for 2030.">
+        Every partnership moves one of these numbers. The full plan, with how we deliver each target, is on our home page.
+      </SectionHead>
+      <TargetTiles />
+      <div class="more rv"><Button href="/#targets" variant="ghost" arrow>See the full plan</Button></div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .more { margin-top: 28px; }
+</style>

@@ -1,0 +1,25 @@
+---
+// Vision, story and founder, with the mission card beside them.
+import Label from "./Label.astro";
+import FounderCard from "./FounderCard.astro";
+import MissionCard from "./MissionCard.astro";
+import { site } from "../data/site";
+---
+<div class="grid">
+  <div class="copy rv">
+    <Label>About YAY</Label>
+    <p class="vision">We solve key social challenges through <mark>inclusivity, hygiene, education, environmental awareness and sustainability</mark>, so that children from every background get an equal start.</p>
+    <p>{site.fullName} was founded on {site.founded} to close the gap between global development goals and action at the grassroots, in the schools and communities where children live and learn. Our work rests on various convictions, chief among them that social justice, human dignity and a healthy environment depend on each other.</p>
+    <p>We work with young people as partners and leaders, in line with the United Nations Youth2030 Strategy. Girls and boys both belong in the room, and so do children with special needs and disabilities.</p>
+    <FounderCard />
+  </div>
+  <MissionCard />
+</div>
+
+<style>
+  .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(28px, 5vw, 70px); align-items: start; }
+  .vision { font-family: var(--display); font-weight: 400; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.3; letter-spacing: -0.015em; margin: 26px 0; }
+  mark { background: linear-gradient(transparent 58%, var(--yellow) 58%); color: inherit; }
+  .copy > p + p { margin-top: 16px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+</style>

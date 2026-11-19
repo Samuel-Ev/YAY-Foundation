@@ -1,0 +1,40 @@
+---
+import Brand from "./Brand.astro";
+import { nav, site } from "../data/site";
+const year = new Date().getFullYear();
+---
+<footer class="bg-ink on-dark">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <Brand size="lg" />
+        <p class="line">{site.motto}.<br />{site.tagline}.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>{nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+      </div>
+      <div>
+        <h4>Reach us</h4>
+        <ul>
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><a href={site.instagram.url} rel="noopener" target="_blank">Instagram {site.instagram.handle}</a></li>
+          <li><a href="/partner#contact">Send a message</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal"><span>© {year} {site.fullName}</span><span><a href="/privacy">Privacy and website terms</a> · Founded {site.founded} · Nigeria</span></div>
+  </div>
+</footer>
+
+<style>
+  footer { padding: 54px 0 34px; }
+  .cols { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 30px; }
+  .line { margin-top: 18px; color: var(--on-dark-muted); }
+  h4 { font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--yellow); margin-bottom: 12px; }
+  ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; font-size: 15.5px; }
+  a { text-decoration: none; }
+  a:hover { color: var(--yellow); }
+  .legal { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line-dark); font-size: 14px; color: #bdbab0; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+  @media (max-width: 760px) { .cols { grid-template-columns: 1fr 1fr; } .cols > div:first-child { grid-column: 1 / -1; } }
+</style>

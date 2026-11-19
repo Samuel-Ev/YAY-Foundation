@@ -1,0 +1,16 @@
+---
+// The brand's outlined repeating words, sliding sideways.
+import { values } from "../data/content";
+const loop = [...values, ...values];
+---
+<div class="band" aria-hidden="true">
+  <div class="track">{loop.map((w, i) => <span class:list={[i % 2 === 0 && "fill"]}>{w}</span>)}</div>
+</div>
+
+<style>
+  .band { overflow: hidden; padding: 26px 0 14px; border-bottom: 1px solid var(--ash-soft); }
+  .track { display: flex; gap: 48px; width: max-content; animation: slide 38s linear infinite; }
+  span { font-family: var(--display); font-weight: 500; font-size: clamp(50px, 9vw, 128px); line-height: 1; letter-spacing: -0.03em; color: transparent; -webkit-text-stroke: 1.2px var(--ink); white-space: nowrap; }
+  span.fill { color: var(--yellow); -webkit-text-stroke: 0; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+</style>

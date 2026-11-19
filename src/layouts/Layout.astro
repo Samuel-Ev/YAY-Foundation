@@ -1,0 +1,105 @@
+---
+// Every page uses this shell: <head> tags, header, footer, phone tab bar and shared scripts.
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BottomNav from "../components/BottomNav.astro";
+import { site } from "../data/site";
+
+interface Props { title?: string; description?: string }
+const { title, description = site.description } = Astro.props;
+const fullTitle = title ? `${title} · ${site.name}` : `${site.name} · ${site.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/og-image.jpg", Astro.site);
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="theme-color" content="#FFD801" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Link previews on WhatsApp, LinkedIn, X and Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={site.fullName} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script is:inline>document.documentElement.classList.add("js");</script>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    name: site.fullName,
+    alternateName: site.name,
+    url: Astro.site?.toString(),
+    logo: new URL("/yay-mark.png", Astro.site).toString(),
+    email: site.email,
+    foundingDate: "2025-02-13",
+    founder: { "@type": "Person", name: site.founder.name },
+    slogan: site.motto,
+    areaServed: "Nigeria",
+    sameAs: [site.instagram.url, site.founder.linkedin].filter(Boolean),
+  })} />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <Header />
+  <main id="main"><slot /></main>
+  <Footer />
+  <BottomNav />
+
+  <script>
+    // Shared behaviour for every page: scroll reveal and count-up numbers.
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reveal = Array.from(document.querySelectorAll<HTMLElement>(".rv"));
+
+    if (reduce || !("IntersectionObserver" in window)) {
+      reveal.forEach((el) => el.classList.add("in"));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+        });
+      }, { rootMargin: "0px 0px -8% 0px" });
+      reveal.forEach((el, i) => { el.style.transitionDelay = `${(i % 4) * 70}ms`; io.observe(el); });
+      // Safety net: never leave content faded if the observer misses something.
+      setTimeout(() => reveal.forEach((el) => el.classList.add("in")), 6000);
+
+      const fmt = (n: number) => Math.round(n).toLocaleString("en-GB");
+      const counters = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          counters.unobserve(e.target);
+          const el = e.target as HTMLElement;
+          const end = Number(el.dataset.count);
+          const suffix = el.dataset.suffix ?? "";
+          let t0 = 0;
+          const step = (t: number) => {
+            if (!t0) t0 = t;
+            const p = Math.min((t - t0) / 1400, 1);
+            el.textContent = fmt(end * (1 - Math.pow(1 - p, 3))) + suffix;
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+          setTimeout(() => (el.textContent = fmt(end) + suffix), 1800);
+        });
+      }, { threshold: 0.6 });
+      document.querySelectorAll("[data-count]").forEach((el) => counters.observe(el));
+    }
+  </script>
+</body>
+</html>

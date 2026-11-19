@@ -1,0 +1,17 @@
+---
+import { partnerWays } from "../data/content";
+---
+<div class="ways">
+  {partnerWays.map((w) => (
+    <article class="way rv"><h3>{w.title}</h3><p>{w.text}</p></article>
+  ))}
+</div>
+
+<style>
+  .ways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .way { background: var(--paper); border-radius: 20px; padding: 26px 24px; border: 1.5px solid var(--ink); transition: transform 0.25s ease; }
+  .way:hover { transform: translateY(-5px); }
+  h3 { font-size: 23px; font-weight: 700; margin-bottom: 10px; }
+  p { font-size: 15.5px; }
+  @media (max-width: 820px) { .ways { grid-template-columns: 1fr; } .way { padding: 22px 20px; } }
+</style>

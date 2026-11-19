@@ -1,0 +1,26 @@
+---
+// Logo mark + typeset wordmark. Replace /yay-mark.png with the original logo file when the client sends it.
+interface Props { size?: "sm" | "lg" }
+const { size = "sm" } = Astro.props;
+const px = size === "lg" ? 64 : 44;
+---
+<a class:list={["brand", size]} href="/" aria-label="YAY Foundation home">
+  <img src="/yay-mark.png" alt="" width={px} height={px} />
+  <span class="wordmark">
+    <b>youngsters are</b>
+    <span>young-st<svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6 6.5.9-4.7 4.6 1.1 6.5L12 17.5l-5.8 3.1 1.1-6.5L2.6 9.5l6.5-.9z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>rs</span>
+    <i>foundation</i>
+  </span>
+</a>
+
+<style>
+  .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: inherit; }
+  .lg img { border: 2px solid var(--yellow); border-radius: 50%; }
+  .wordmark { font-family: var(--display); font-size: 15px; line-height: 1.02; letter-spacing: -0.01em; }
+  .lg .wordmark { font-size: 23px; }
+  .wordmark b { font-weight: 700; display: block; }
+  .wordmark span { font-weight: 500; display: block; }
+  .wordmark i { font-style: normal; font-weight: 300; display: block; }
+  .star { display: inline-block; width: 0.62em; height: 0.62em; vertical-align: -0.02em; margin: 0 0.01em; }
+  @media (max-width: 860px) { .sm img { width: 38px; height: 38px; } .sm .wordmark { font-size: 14px; } }
+</style>

@@ -1,0 +1,41 @@
+---
+// Photo grid on desktop, a swipeable strip on phones.
+// Astro turns each photo into resized WebP files automatically at build time.
+import { Image } from "astro:assets";
+import { gallery } from "../data/content";
+interface Props { limit?: number }
+const { limit } = Astro.props;
+const photos = limit ? gallery.slice(0, limit) : gallery;
+---
+<div class:list={["shots", limit && "compact"]}>
+  {photos.map((p, i) => (
+    <figure class={`rv s${i + 1}`}>
+      <Image src={p.src} alt={p.alt} widths={[480, 800, 1200]} sizes="(max-width: 760px) 82vw, (max-width: 1180px) 50vw, 760px" loading="lazy" />
+      <figcaption>{p.caption}</figcaption>
+    </figure>
+  ))}
+</div>
+
+<style>
+  .shots { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+  figure { margin: 0; position: relative; overflow: hidden; border-radius: 16px; background: var(--ink); }
+  figure :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+  figure:hover :global(img) { transform: scale(1.05); }
+  figcaption { position: absolute; left: 10px; bottom: 10px; background: var(--ink); color: var(--paper); font-family: var(--display); font-size: 13px; padding: 4px 10px; border-radius: 999px; }
+  .s1 { grid-column: span 8; aspect-ratio: 3 / 2; }
+  .s2 { grid-column: span 4; }
+  .s3, .s4, .s5 { grid-column: span 4; aspect-ratio: 4 / 3; }
+  .s6, .s7 { grid-column: span 6; aspect-ratio: 16 / 9; }
+  .compact .s4 { grid-column: span 4; }
+  .compact .s3 { grid-column: span 8; }
+
+  @media (max-width: 760px) {
+    .shots {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px;
+      margin-inline: calc(var(--gut) * -1); padding: 0 var(--gut) 6px; scrollbar-width: none;
+    }
+    .shots::-webkit-scrollbar { display: none; }
+    figure { flex: 0 0 82%; aspect-ratio: 4 / 3 !important; scroll-snap-align: start; }
+    figure:hover :global(img) { transform: none; }
+  }
+</style>

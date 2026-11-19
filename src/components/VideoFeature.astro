@@ -1,0 +1,21 @@
+---
+import Label from "./Label.astro";
+---
+<div class="film rv">
+  <video controls preload="none" playsinline poster="/outreach-video-poster.jpg" aria-label="Short film from a YAY Foundation school outreach">
+    <source src="/outreach-video.mp4" type="video/mp4" />
+  </video>
+  <div>
+    <Label>Watch</Label>
+    <h3>55 seconds inside an outreach.</h3>
+    <p>A short clip filmed by our team in a school yard, with hundreds of girls gathered for the day's session.</p>
+  </div>
+</div>
+
+<style>
+  .film { display: grid; grid-template-columns: auto 1fr; gap: clamp(24px, 5vw, 64px); align-items: center; margin-top: clamp(36px, 5vw, 64px); }
+  video { width: min(280px, 70vw); aspect-ratio: 9 / 16; border-radius: 26px; border: 8px solid var(--ink); background: var(--ink); object-fit: cover; }
+  h3 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; margin: 16px 0 14px; }
+  p { max-width: 30em; }
+  @media (max-width: 700px) { .film { grid-template-columns: 1fr; } video { margin: 0 auto; } }
+</style>
